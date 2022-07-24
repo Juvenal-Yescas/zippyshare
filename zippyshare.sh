@@ -48,10 +48,9 @@ function zippydownload() {
             algorithm="${dlbutton}/3+${dlbutton}"
             a="$(echo $((${algorithm})))"
         else
-            dlbutton="$(grep 'getElementById..dlbutton...href' "${infofile}" | grep -oE '\([0-9].*\)')"
+            dlbutton="$(grep 'getElementById..dlbutton...href' "${infofile}" | grep -oE '[0-9]{0,}%[0-9]{0,}')"
             if [ -n "${dlbutton}" ]; then
-                algorithm="${dlbutton}"
-                a="$(echo $((${algorithm})))"
+                a=$((dlbutton+11))
             else
                 echo "could not get zippyshare url algorithm"
                 exit 1
